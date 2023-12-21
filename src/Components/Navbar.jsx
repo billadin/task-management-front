@@ -75,7 +75,7 @@ const Navbar = () => {
             <Link to={"/login"}>
               <button
                onClick={handleLogout}
-               className="btn btn-primary hover:bg-transparent">
+               className="btn btn-primary">
                 Logout
               </button>
             </Link>

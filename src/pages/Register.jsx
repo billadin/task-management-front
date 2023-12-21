@@ -39,7 +39,7 @@ const Register = () => {
     try {
         await createUser(email, password)
         toast.success('Account created successfully');
-        navigate('/');
+        navigate('/board');
       } catch (error) {
           toast.error(FirebaseErrorMessage(error));
           setLoading(false)
@@ -52,7 +52,7 @@ const Register = () => {
       const res = await loggingWithGoogle();
       console.log(res);
       toast.success("Logged in successfully");
-      navigate(location?.state ? location?.state : "/");
+      navigate(location?.state ? location?.state : "/board");
     } catch (error) {
       toast.error(FirebaseErrorMessage(error));
       setLoading(false);

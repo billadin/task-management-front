@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Error, Features, Landing, Login, Pricing, Register } from "./pages";
+import SharedLayout from "./Layout/SharedLayout";
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <Register/>,
+    errorElement: <Error/>
+  },
+  {
+    path: '/board',
+    element: <SharedLayout/>,
     errorElement: <Error/>
   }
 ])

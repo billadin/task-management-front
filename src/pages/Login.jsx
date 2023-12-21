@@ -20,7 +20,7 @@ const Login = () => {
     try {
       await signInUser(email, password);
       toast.success("Logged in successfully");
-      navigate(location?.state ? location?.state : "/");
+      navigate(location?.state ? location?.state : "/board");
     } catch (error) {
       toast.error(FirebaseErrorMessage(error));
       setLoading(false);
@@ -33,7 +33,7 @@ const Login = () => {
       const res = await loggingWithGoogle();
       console.log(res);
       toast.success("Logged in successfully");
-      navigate(location?.state ? location?.state : "/");
+      navigate(location?.state ? location?.state : "/board");
     } catch (error) {
       toast.error(FirebaseErrorMessage(error));
       setLoading(false);

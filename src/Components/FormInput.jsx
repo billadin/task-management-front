@@ -11,7 +11,7 @@ const FormInput = ({ label, name, type, defaultValue, size, readOnly, placeholde
           name={name}
           defaultValue={defaultValue}
           placeholder={placeholder}
-          className={`input input-bordered ${size} rounded-[4px]`}
+          className={`input input-bordered ${size} rounded-[4px] p-2`}
           readOnly={readOnly ? true : false}
         />
       </div>

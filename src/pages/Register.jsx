@@ -26,13 +26,11 @@ const Register = () => {
             </p>
             <FormInput
               type="email"
-              label="email"
               name="email"
               placeholder="Enter your email..."
             />
             <FormInput
               type="password"
-              label="password"
               name="password"
               placeholder="Enter your password"
             />
@@ -51,7 +49,7 @@ const Register = () => {
               type="submit"
               className="btn btn-ghost rounded-[4px] btn-block border border-slate-300"
             >
-              Sign in with google
+              Continue with Google
             </button>
           </div>
           <p className="text-center my-4">
@@ -67,7 +65,7 @@ const Register = () => {
           <hr className="h-1" />
 
           <div className="text-center my-8 space-x-2">
-            <h2 className="font-semibold text-xl">Task</h2>
+            <h2 className="font-semibold text-xl mb-2">Task</h2>
             <Link>Privacy</Link>
             <Link>Terms</Link>
           </div>

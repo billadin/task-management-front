@@ -19,7 +19,7 @@ const Register = () => {
     const { email, password } = data;
 
     // Validations
-    if (!username || !email || !password) {
+    if (!email || !password) {
       toast.error("Please complete the form");
       return;
     }
@@ -33,6 +33,17 @@ const Register = () => {
       toast.error("Please add at least one special character in password");
       return;
     }
+
+    //Creating user using firebase auth
+    try {
+        await createUser(email, password)
+        toast.success('Account created successfully');
+        navigate('/');
+      } catch (error) {
+          toast.error(FirebaseErrorMessage(error));
+          setLoading(false)
+          navigate('/register')
+      }
   };
 
   const handleGoogleLogin = async () => {

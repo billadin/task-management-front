@@ -1,7 +1,13 @@
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useNavigate } from "react-router-dom";
 import { FormInput, SubmitBtn } from "../Components";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const {signInUser,loggingWithGoogle,setLoading} = useContext(AuthContext);
+  const navigate = useNavigate()
+
   const handleLogin = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -9,7 +15,18 @@ const Login = () => {
     const { email, password } = data;
   };
 
-  const handleGoogleLogin = async () => {};
+  const handleGoogleLogin = async () => {
+    try {
+        const res = await loggingWithGoogle()
+        console.log(res)
+        toast.success('Logged in successfully');
+        navigate(location?.state ? location?.state : '/')
+      } catch (error) {
+        toast.error(`Error: ${error}`);
+        setLoading(false)
+        navigate('/login')
+      } 
+  };
 
   return (
     <>

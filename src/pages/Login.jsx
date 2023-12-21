@@ -14,6 +14,17 @@ const Login = () => {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     const { email, password } = data;
+
+    //Login with firebase login
+    try {
+      await signInUser(email, password);
+      toast.success("Logged in successfully");
+      navigate(location?.state ? location?.state : "/");
+    } catch (error) {
+      toast.error(FirebaseErrorMessage(error));
+      setLoading(false);
+      navigate("/login");
+    }
   };
 
   const handleGoogleLogin = async () => {

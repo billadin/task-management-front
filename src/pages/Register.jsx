@@ -1,13 +1,13 @@
 import React from "react";
 import { Form, Link, useNavigate } from "react-router-dom";
-import { FormInput, SubmitBtn } from "../Components";
+import { FormInput, Loading, SubmitBtn } from "../Components";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { FirebaseErrorMessage } from "../utils";
 
 const Register = () => {
-  const { createUser, loggingWithGoogle, setLoading } = useContext(AuthContext);
+  const { createUser, loggingWithGoogle, loading, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleRegister = async (event) => {
@@ -58,6 +58,11 @@ const Register = () => {
       navigate("/register");
     }
   };
+
+  if(loading) {
+    return <Loading/>
+  }
+
 
   return (
     <section className="h-screen grid place-items-center bg-slate-50">

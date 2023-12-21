@@ -1,12 +1,12 @@
 import { Form, Link, useNavigate } from "react-router-dom";
-import { FormInput, SubmitBtn } from "../Components";
+import { FormInput, Loading, SubmitBtn } from "../Components";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { FirebaseErrorMessage } from "../utils";
 
 const Login = () => {
-  const { signInUser, loggingWithGoogle, setLoading } = useContext(AuthContext);
+  const { signInUser, loggingWithGoogle, loading, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
@@ -39,6 +39,10 @@ const Login = () => {
       navigate("/login");
     }
   };
+
+  if(loading) {
+    return <Loading/>
+  }
 
   return (
     <>

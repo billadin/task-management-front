@@ -5,9 +5,10 @@ import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { FirebaseErrorMessage } from "../utils";
+import { useEffect } from "react";
 
 const Register = () => {
-  const { createUser, loggingWithGoogle, loading, setLoading } = useContext(AuthContext);
+  const { user, createUser, loggingWithGoogle, loading, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleRegister = async (event) => {
@@ -59,9 +60,11 @@ const Register = () => {
     }
   };
 
-  if(loading) {
-    return <Loading/>
-  }
+  useEffect(() => {
+    if (user) {
+      navigate(location?.state ? location?.state : "/");
+    }
+  }, []);
 
 
   return (

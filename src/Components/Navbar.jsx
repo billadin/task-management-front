@@ -1,6 +1,21 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
+import { toast } from 'react-toastify';
+import { FirebaseErrorMessage } from '../utils';
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = async () => {
+    try {
+      logOut();
+      toast.success("Successfully logged out");
+    } catch (error) {
+      toast.error(FirebaseErrorMessage(error));
+    }
+  };
+
   return (
     <>
       <div className="navbar bg-base-100">
@@ -37,10 +52,12 @@ const Navbar = () => {
           </div>
           {/* Nav Logo */}
           <Link>
-            <button className="btn btn-ghost text-xl hover:bg-transparent">TASK</button>
+            <button className="btn btn-ghost text-xl hover:bg-transparent">
+              TASK
+            </button>
           </Link>
           {/* Nav menu items */}
-          <div className='hidden lg:inline-flex'>
+          <div className="hidden lg:inline-flex">
             <ul className="menu menu-horizontal px-1 space-x-4">
               <Link to={"/features"}>
                 <li>Features</li>
@@ -53,17 +70,31 @@ const Navbar = () => {
         </div>
 
         {/* Nav items */}
-        <div className="navbar-end space-x-2">
-          <Link to={"/login"}>
-            <button className="btn btn-ghost hover:bg-transparent">Login</button>
-          </Link>
-          <Link to={"/register"}>
-            <button className="btn btn-primary">Get started</button>
-          </Link>
-        </div>
+        {user ? (
+          <div className="navbar-end space-x-2">
+            <Link to={"/login"}>
+              <button
+               onClick={handleLogout}
+               className="btn btn-primary hover:bg-transparent">
+                Logout
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <div className="navbar-end space-x-2">
+            <Link to={"/login"}>
+              <button className="btn btn-ghost hover:bg-transparent">
+                Login
+              </button>
+            </Link>
+            <Link to={"/register"}>
+              <button className="btn btn-primary">Get started</button>
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );
-}
+};
 
 export default Navbar

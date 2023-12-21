@@ -4,9 +4,10 @@ import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { FirebaseErrorMessage } from "../utils";
+import { useEffect } from "react";
 
 const Login = () => {
-  const { signInUser, loggingWithGoogle, loading, setLoading } = useContext(AuthContext);
+  const { user, signInUser, loggingWithGoogle, loading, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
@@ -40,9 +41,11 @@ const Login = () => {
     }
   };
 
-  if(loading) {
-    return <Loading/>
-  }
+  useEffect(() => {
+    if (user) {
+      navigate(location?.state ? location?.state : "/");
+    }
+  }, []);
 
   return (
     <>

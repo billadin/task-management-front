@@ -3,6 +3,7 @@ import { FormInput, SubmitBtn } from "../Components";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import { FirebaseErrorMessage } from "../utils";
 
 const Login = () => {
   const {signInUser,loggingWithGoogle,setLoading} = useContext(AuthContext);
@@ -22,7 +23,7 @@ const Login = () => {
         toast.success('Logged in successfully');
         navigate(location?.state ? location?.state : '/')
       } catch (error) {
-        toast.error(`Error: ${error}`);
+        toast.error(FirebaseErrorMessage(error));
         setLoading(false)
         navigate('/login')
       } 

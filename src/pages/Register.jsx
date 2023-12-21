@@ -1,8 +1,15 @@
 import React from 'react'
-import { Form, Link } from 'react-router-dom';
+import { Form, Link, useNavigate } from 'react-router-dom';
 import { FormInput, SubmitBtn } from '../Components';
+import { useContext } from 'react';
+import { AuthContext } from '../Provider/AuthProvider';
+import { toast } from 'react-toastify';
+import { FirebaseErrorMessage } from '../utils';
 
 const Register = () => {
+    const {loggingWithGoogle,setLoading} = useContext(AuthContext);
+    const navigate = useNavigate()
+
     const handleRegister = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -10,7 +17,18 @@ const Register = () => {
         const { username, email, password, img } = data;
     }
 
-    const handleGoogleLogin = async () => {};
+const handleGoogleLogin = async () => {
+    try {
+        const res = await loggingWithGoogle()
+        console.log(res)
+        toast.success('Logged in successfully');
+        navigate(location?.state ? location?.state : '/')
+        } catch (error) {
+        toast.error(FirebaseErrorMessage(error));
+        setLoading(false)
+        navigate('/register')
+        } 
+    };
 
   return (
     <section className="h-screen grid place-items-center bg-slate-50">

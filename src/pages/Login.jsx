@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 import { FirebaseErrorMessage } from "../utils";
 
 const Login = () => {
-  const {signInUser,loggingWithGoogle,setLoading} = useContext(AuthContext);
-  const navigate = useNavigate()
+  const { signInUser, loggingWithGoogle, setLoading } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -18,15 +18,15 @@ const Login = () => {
 
   const handleGoogleLogin = async () => {
     try {
-        const res = await loggingWithGoogle()
-        console.log(res)
-        toast.success('Logged in successfully');
-        navigate(location?.state ? location?.state : '/')
-      } catch (error) {
-        toast.error(FirebaseErrorMessage(error));
-        setLoading(false)
-        navigate('/login')
-      } 
+      const res = await loggingWithGoogle();
+      console.log(res);
+      toast.success("Logged in successfully");
+      navigate(location?.state ? location?.state : "/");
+    } catch (error) {
+      toast.error(FirebaseErrorMessage(error));
+      setLoading(false);
+      navigate("/login");
+    }
   };
 
   return (
